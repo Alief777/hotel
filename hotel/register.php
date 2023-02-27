@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
 
 	<link rel="stylesheet" type="text/css" href="nis.css">
 
-	<title>Register Form </title>
+	<title>Register</title>
 </head>
 <body  style="background-image: 2.jpg;">
 	<div class="container">
@@ -30,6 +30,9 @@ if (isset($_POST["submit"])) {
 			</div>
 			<div class="input-group">
 				<input type="text" placeholder="email" name="email" required>
+			</div>
+			<div class="input-group">
+				<input type="text" placeholder="nomor telephone" name="no_telepon" required>
 			</div>
 			<div class="input-group">
 				<input type="text" placeholder="nama lengkap" name="nama_lengkap" required>

@@ -6,11 +6,13 @@ $fasilitas_kamar = explode(',',$kamar[0]["fasilitas_kamar"]);
 
 if (isset($_POST["edit-kamar"])) {
 	rubahKamar($_POST);
+	die;
 }
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
 	<?php foreach($kamar as $key) : ?>
+		<input type="hidden" name="id_kamar" value="<?= $key["id_kamar"] ?>">
 		<div class="mb-3">
 			<label for="tipe_kamar" class="form-label">Tipe Kamar</label>
 			<input type="text" class="form-control" name="tipe_kamar" id="tipe_kamar" value="<?= $key["tipe_kamar"] ?>">
@@ -24,9 +26,9 @@ if (isset($_POST["edit-kamar"])) {
 			<div class="d-flex">
 				<div style="position: relative; width: 20%;">
 					<span class="btn btn-primary w-100">Choose</span>
-					<input class="rounded-start form-control" type="file" name="gambar_kamar" id="upload" style="position: absolute; margin-top: -38px; opacity: 0; cursor: pointer;">
+					<input class="rounded-start form-control" type="file" name="gambar" id="upload" style="position: absolute; margin-top: -38px; opacity: 0; cursor: pointer;">
 				</div>
-				<input type="text" class="form-control" value="<?= $key["gambar"] ?>" id="text-gambar" style="width: 80%;">
+				<input type="text" name="gambar_lama" class="form-control" value="<?= $key["gambar"] ?>" id="text-gambar" style="width: 80%;">
 			</div>
 		</div>
 		<div class="mb-3">
@@ -56,5 +58,5 @@ if (isset($_POST["edit-kamar"])) {
 			</select>
 		</div>
 	<?php endforeach; ?>
-	<button type="submit" class="w-100 rounded mb-4 btn btn-primary">Simpan</button>
+	<button type="submit" class="w-100 rounded mb-4 btn btn-primary" name="edit-kamar">Simpan</button>
 </form>

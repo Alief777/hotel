@@ -2,13 +2,19 @@
 
 include "function.php";
 
+global $conn;
+
 if (!isset($_SESSION["id_user"])) {
     header("Location: login.php");
 }
 
-$id_user = $_SESSION["id_user"];
+$id_user = $_SESSION["login"];
+
+$rows = mysqli_query($conn, "SELECT * FROM user WHERE id_user='$id_user'");
+$user = mysqli_fetch_assoc($rows);
 
 $kamar = query("SELECT * FROM kamar");
+$fasum = query("SELECT * FROM fasum");
 $users = query("SELECT * FROM user WHERE id_user = $id_user"); 
 
 if (isset($_POST['cek'])) {
@@ -133,7 +139,7 @@ if (isset($_POST['cek'])) {
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
                                 <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
                                 <a href="#listkmr" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">List Kamar</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
+                                <a href="#booking" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
                             </div>
                         </div>
                     </div>
@@ -144,7 +150,7 @@ if (isset($_POST['cek'])) {
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
                                 <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
                                 <a href="#listkmr" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">List Kamar</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
+                                <a href="#booking" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
                             </div>
                         </div>
                     </div>
@@ -175,7 +181,15 @@ if (isset($_POST['cek'])) {
                             <input type="hidden" name="id_user" value="<?= $id_user; ?>">
                             <div class="check-date">
                                 <label for="email">Email:</label>
-                                <input type="text" id="email" class="" name="email" value="<?= $users["email"] ?>">
+                                <input type="text" id="email" class="" name="email" value="<?= $user["email"] ?>">
+                            </div>
+                            <div class="check-date">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" class="" name="username" value="<?= $user["username"] ?>">
+                            </div>
+                            <div class="check-date">
+                                <label for="no hape">Nomor Telephone:</label>
+                                <input type="text" id="no_telepon" class="" name="no_telepon" value="<?= $user["no_telepon"] ?>">
                             </div>
                             <div class="check-date">
                                 <label for="date-in">Check In (11:00):</label>
@@ -189,16 +203,14 @@ if (isset($_POST['cek'])) {
                             </div>
                             <div class="select-option">
                                 <label for="Tipe">Tipe Kamar:</label>
-                                <select id="Tipe" name="tipe-kamar">
-                                    <option value="DELUX">Delux</option>
-                                    <option value="SINGLE ROOM">Single Room</option>
-                                    <option value="DOUBLE ROOM">Double Room</option>
-                                    <option value="KINGS ROOM">Kings Room</option>
-                                    <option value="FAMILY ROOM">Family Room</option>
+                                <select id="Tipe" name="tipe-kamar" >
+                                    <option value="DELUXE">deluxe</option>
+                                    <option value="KING ROOM">King Room</option>
                                 </select>
                         </div>
+                        <input type="hidden" name="kode" value="<?= $kode_booking; ?>">
                         <div class="col-md-2">
-                            <button class="btn btn-primary w-100" type="submit">Submit</button>
+                            <button class="btn btn-primary w-100" type="submit" name="booking">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -327,72 +339,19 @@ if (isset($_POST['cek'])) {
                     <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Services</span></h1>
                 </div>
                 <div class="row g-4">
+                    <?php foreach($fasum as $key) :?>
                     <div class="col-lg-4 col-md-6 wow fadeInUp"  data-wow-delay="0.1s">
                         <a class="service-item rounded" href="" style="background-color: #F99417;">
-                            <div class="service-icon bg-transparent border rounded p-1">
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-hotel fa-2x text-primary"></i>
+                            <div class="service-icon bg-transparent rounded p-1">
+                                <div class="w-100 h-100 rounded d-flex align-items-center justify-content-center">
+                                    <img src="img/<?= $key["gambar"] ?>" alt="<?= $key["gambar"] ?>" width="100" srcset="">
                                 </div>
                             </div>
-                            <h5 class="mb-3">Rooms & Appartment</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3"><?= $key["nama_fasum"] ?></h5>
+                            <p class="text-body mb-0"><?= $key["keterangan"] ?></p>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <a class="service-item rounded" href="" style="background-color: #F99417;">
-                            <div class="service-icon bg-transparent border rounded p-1">
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-utensils fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <h5 class="mb-3">Food & Restaurant</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="service-item rounded" href="" style="background-color: #F99417;">
-                            <div class="service-icon bg-transparent border rounded p-1">
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-spa fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <h5 class="mb-3">Spa & Fitness</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                        <a class="service-item rounded" href="" style="background-color: #F99417;">
-                            <div class="service-icon bg-transparent border rounded p-1">
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-swimmer fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <h5 class="mb-3">Sports & Gaming</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="service-item rounded" href="" style="background-color: #F99417;">
-                            <div class="service-icon bg-transparent border rounded p-1">
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-glass-cheers fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <h5 class="mb-3">Event & Party</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                        <a class="service-item rounded" href=""style="background-color: #F99417;">
-                            <div class="service-icon bg-transparent border rounded p-1">
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-dumbbell fa-2x text-primary"></i>
-                                </div>
-                            </div>
-                            <h5 class="mb-3">GYM & Yoga</h5>
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </a>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

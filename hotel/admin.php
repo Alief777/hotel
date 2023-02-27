@@ -65,6 +65,24 @@ if (isset($_POST["cari"])) {
                             case 'edit-kamar':
                                 include 'edit-kamar.php';
                                 break;
+                            case 'daftar-fasum':
+                                include 'daftar-fasum.php';
+                                break;
+                            case 'tambah-fasum':
+                                include 'tambah-fasum.php';
+                                break;
+                            case 'edit-fasum':
+                                include 'edit-fasum.php';
+                                break;
+                            case 'Karyawan':
+                                include 'karyawan.php';
+                            break;        
+                            case 'tambah-karyawan':
+                                include 'tambah_karyawan.php';
+                            break;        
+                            case 'edit-karyawan':
+                                include 'edit-karyawan.php';
+                            break;
                             default:
                                 break;
                         }
@@ -82,6 +100,12 @@ if (isset($_POST["cari"])) {
     </a>
     <?php if(isset($_GET["page"])) : ?>
         <?php if($page == 'edit-kamar') : ?>
+            <script src="js/script.js"></script>
+        <?php elseif($page == 'tambah-kamar') : ?>
+            <script src="js/script.js"></script>
+        <?php elseif($page == 'tambah-fasum') : ?>
+            <script src="js/script.js"></script>
+        <?php elseif($page == 'edit-fasum') : ?>
             <script src="js/script.js"></script>
         <?php else : ?>
 

@@ -1,45 +1,55 @@
 <?php
 
-if (isset($_POST["tambah"])) {
+if (isset($_POST["tambah-kamar"])) {
     tambah($_POST);
 }
 
-
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Kamar</title>
-</head>
-
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-        <label for="">tipe kamar</label><br>
-        <input type="text" name="tipe_kamar"><br>
-        <label for="">nomor kamar</label><br>
-        <input type="text" name="no_kamar"><br>
-        <label for="">Gambar</label><br>
-        <input type="file" name="gambar"><br>
-        <label for="">Harga</label><br>
-        <input type="text" name="harga_kamar"><br>
-        <label for="">fasilitas Kamar</label><br>
-        <input type="checkbox" name="fasilitas[]" value="bathtub"> bathtub <br>
-        <input type="checkbox" name="fasilitas[]" value="tv"> tv <br>
-        <input type="checkbox" name="fasilitas[]" value="rumah"> rumah <br>
-        <input type="checkbox" name="fasilitas[]" value="kasur"> kasur <br>
-        <input type="checkbox" name="fasilitas[]" value="rambut"> rambut <br>
-        <input type="checkbox" name="fasilitas[]" value="jombi"> jombi <br>
-        <label for="status">Status</label> <br>
-        <select name="status_kamar" id="status"> <br>
-            <option value="isi">isi</option>
-            <option value="tidak-isi">tidak-isi</option>
-        </select> <br>
-        <button type="submit" name="tambah">Tambah</button>
-    </form>
-</body>
-
-</html>
+<form action="" method="post" enctype="multipart/form-data">
+		<div class="mb-3">
+			<label for="tipe_kamar" class="form-label">Tipe Kamar</label>
+			<input type="text" class="form-control" name="tipe_kamar" id="tipe_kamar">
+		</div>
+		<div class="mb-3">
+			<label for="nomor_kamar" class="form-label">Nomor Kamar</label>
+			<input type="text" class="form-control" name="nomor_kamar" id="nomor_kamar">
+		</div>
+		<div class="mb-3">
+			<label for="upload" class="form-label">Upload Gambar</label>
+			<div class="d-flex">
+				<div style="position: relative; width: 20%;">
+					<span class="btn btn-primary w-100">Choose</span>
+					<input class="rounded-start form-control" type="file" name="gambar" id="upload" style="position: absolute; margin-top: -38px; opacity: 0; cursor: pointer;">
+				</div>
+                <input type="text" name="gambar_lama" class="form-control" id="text-gambar" style="width: 80%;">
+			</div>
+		</div>
+		<div class="mb-3">
+			<label for="harga_kamar" class="form-label">Harga Kamar</label>
+			<input type="text" class="form-control" name="harga" id="harga_kamar">
+		</div>
+		<div class="mb-3">
+			<label for="harga_kamar" class="form-label">Fasilitas Kamar</label>
+			<div class="form-check form-switch">
+				<input class="form-check-input" type="checkbox" name="fasilitas[]" value="bathub" id="flexSwitchCheckDefault">
+				<label class="form-check-label" for="flexSwitchCheckDefault">Bathub</label>
+			</div>
+			<div class="form-check form-switch">
+				<input class="form-check-input" type="checkbox" name="fasilitas[]" value="tv" id="flexSwitchCheckDefault">
+				<label class="form-check-label" for="flexSwitchCheckDefault">TV</label>
+			</div>
+			<div class="form-check form-switch">
+				<input class="form-check-input" type="checkbox" name="fasilitas[]" value="wifii" id="flexSwitchCheckDefault">
+				<label class="form-check-label" for="flexSwitchCheckDefault">Wifii</label>
+			</div>
+		</div>
+		<div class="mb-3">
+			<label for="status_kamar" class="form-label">Status Kamar</label>
+			<select name="status" id="status_kamar" class="border rounded" style="width: 100%; height: 37px; outline: none;">
+				<option value="isi">isi</option>
+				<option value="tidak-isi">tidak-isi</option>
+			</select>
+		</div>
+	<button type="submit" class="w-100 rounded mb-4 btn btn-primary" name="tambah-kamar">Simpan</button>
+</form>

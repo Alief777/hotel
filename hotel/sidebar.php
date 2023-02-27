@@ -35,8 +35,20 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="utilities-color.html">Daftar Fasum</a>
-                <a class="collapse-item" href="utilities-border.html">Tambah Fasum</a>
+                <a class="collapse-item" href="?page=daftar-fasum">Daftar Fasum</a>
+                <a class="collapse-item" href="?page=tambah-fasum">Tambah Fasum</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#coba" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Karyawan</span>
+        </a>   
+        <div id="coba" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="?page=Karyawan">Daftar Karyawan</a>
+                <a class="collapse-item" href="?page=tambah-karyawan">Tambah Karyawan</a>
             </div>
         </div>
     </li>
@@ -46,5 +58,4 @@
             <span>Log Out</span>
         </a>
     </li>
-
 </ul>
